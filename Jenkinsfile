@@ -101,11 +101,10 @@ pipeline {
       }
     }
   }
-/*
+
   post {
     always {
       deleteDir ()
     }
   }
-*/
 }
