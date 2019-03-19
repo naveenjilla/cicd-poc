@@ -1,0 +1,40 @@
+pipeline {
+
+  agent {
+    label "kube-node"
+  }
+
+  options {
+      buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10')
+      disableConcurrentBuilds()
+  }
+
+  parameters {
+		choice choices: ['hwprodns', 'hwdevns'], description: 'Environment to deploy the App', name: 'environment'
+		// string (defaultValue: "", description: 'Version to deploy the app', name: 'version')
+	}
+
+  stages {
+    stage('prep workspace') {
+      steps {
+        deleteDir()
+      }
+    }
+
+    stage('deploy to the env') {
+      steps {
+        container(name: 'maven', shell: '/bin/bash') {
+          sh 'kubectl rollout history deployment/application -n ${environment}'
+					sh 'kubectl rollout undo deployment/application -n ${environment}'
+        }
+      }
+    }
+  }
+
+  post {
+    always {
+      deleteDir ()
+    }
+  }
+
+}
