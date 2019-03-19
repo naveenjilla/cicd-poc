@@ -10,7 +10,7 @@ pipeline {
   }
 
   environment {
-    currentAppVersion = '1.0.0'
+    currentAppVersion = '1.0.1'
   }
 
   stages {
