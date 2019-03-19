@@ -10,7 +10,7 @@ pipeline {
   }
 
   environment {
-    currentAppVersion = ''
+    currentAppVersion = '1.0-SNAPSHOT'
   }
 
   stages {
@@ -25,10 +25,10 @@ pipeline {
       steps {
   			container(name: 'maven', shell: '/bin/bash') {
           git branch: 'develop', url: 'https://github.com/naveenjilla/cicd-poc'
-          script {
+          /*script {
             pomInfo = readMavenPom file: 'pom.xml'
             currentAppVersion=pomInfo.version
-          }
+          }*/
         }
       }
     }
