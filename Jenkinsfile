@@ -24,7 +24,7 @@ pipeline {
     stage('checkout repo') {
       steps {
   			container(name: 'maven', shell: '/bin/bash') {
-          git branch: 'develop', credentialsId: 'githublogin', url: 'https://github.com/naveenjilla/cicd-poc'
+          git branch: 'develop', url: 'https://github.com/naveenjilla/cicd-poc'
           script {
             pomInfo = readMavenPom file: 'pom.xml'
             currentAppVersion=pomInfo.version
