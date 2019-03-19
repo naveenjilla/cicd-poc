@@ -32,7 +32,7 @@ pipeline {
         }
       }
     }
-
+/*
     stage('create release branch') {
       when {
         expression {
@@ -64,7 +64,7 @@ pipeline {
         }
       }
     }
-
+*/
     stage('compile') {
       steps {
         container(name: 'maven', shell: '/bin/bash') {
